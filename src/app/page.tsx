@@ -54,7 +54,7 @@ const page = () => {
         );
         setShortcutData(response.data);
       } catch (error) {
-        setError(error);
+        console.log(error)
       }
       setLoading(false);
     };

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sendbird_sdk/sendbird_sdk.dart';
 
 void main() {
   runApp(ChatPage());
@@ -49,6 +50,19 @@ class _ChatScreenState extends State<ChatScreen> {
   ];
 
   final TextEditingController _textController = TextEditingController();
+  final SendbirdSdk sendbird = SendbirdSdk();
+
+  @override
+  void initState() {
+    super.initState();
+    // Initialize Sendbird
+    sendbird
+      .init(appId: 'BC823AD1-FBEA-4F08-8F41-CF0D9D280FBF')
+      .then((_) {
+        // Authenticate user
+        sendbird.connect(userId: 'your_user_id', accessToken: 'f93b05ff359245af400aa805bafd2a091a173064');
+      });
+  }
 
   void _sendMessage() {
     if (_textController.text.isNotEmpty) {
@@ -56,6 +70,13 @@ class _ChatScreenState extends State<ChatScreen> {
         messages.add(Message(sender: 'Me', text: _textController.text));
         _textController.clear();
       });
+      
+      // Send message using Sendbird
+      sendbird
+        .createUserMessage(channelUrl: 'your_channel_url', message: _textController.text)
+        .then((_) {
+          // Message sent successfully
+        });
     }
   }
 
@@ -109,8 +130,7 @@ class ChatMessage extends StatelessWidget {
   final String text;
   final bool isMe;
 
-  const ChatMessage(
-      {Key? key, required this.sender, required this.text, required this.isMe})
+  const ChatMessage({Key? key, required this.sender, required this.text, required this.isMe})
       : super(key: key);
 
   @override
@@ -118,8 +138,7 @@ class ChatMessage extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Row(
-        mainAxisAlignment:
-            isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
+        mainAxisAlignment: isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (!isMe) ...[
@@ -134,8 +153,7 @@ class ChatMessage extends StatelessWidget {
               borderRadius: BorderRadius.circular(10.0),
               elevation: 5.0,
               child: Padding(
-                padding: const EdgeInsets.symmetric(
-                    vertical: 10.0, horizontal: 20.0),
+                padding: const EdgeInsets.all(10.0),
                 child: Text(
                   text,
                   style: TextStyle(
