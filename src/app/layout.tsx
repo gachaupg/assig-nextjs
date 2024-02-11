@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { BiSearch } from "react-icons/bi";
+import { LuArrowBigDown } from "react-icons/lu";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +18,37 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <div className="flex items-center justify-between h-12 w-full p-3 bg--600">
+          <div className="flex items-center">
+            <div className="flex items-center space-x-4">
+              <a href="/" className="text-green-600 text-2xl">
+                TestValley <span className="ml-2">카테고리</span>
+              </a>
+              <a href="/about" className="text-white">
+                About
+              </a>
+            </div>
+          </div>
+          <div className="flex items-center relative space-x-4">
+            <input
+              className="border rounded-lg border-slate-500 h-10 w-72 pl-10"
+              placeholder="search...."
+              type="text"
+              value=""
+            />
+            <BiSearch className="absolute left-2" />
+          </div>
+
+          <div className="flex items-center space-x-4">
+            <LuArrowBigDown className="text-black" size={38} />
+            <a href="/login" className="text-black">
+              로그인 / 회원가입
+            </a>
+          </div>
+        </div>
+        {children}
+      </body>
     </html>
   );
 }
