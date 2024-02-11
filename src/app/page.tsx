@@ -10,7 +10,7 @@ const page = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const [images, setImages] = useState([]);
+  const [images, setImages] = useState([]as any);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
@@ -62,7 +62,7 @@ const page = () => {
     fetchData();
   }, []);
 
-  const [collections, setCollections] = useState([]);
+  const [collections, setCollections] = useState([] as any);
 
   useEffect(() => {
     const fetchCollections = async () => {
@@ -88,8 +88,8 @@ const page = () => {
             <>
               <img
                 className="object-cover w-full h-full"
-                src={images[currentIndex].mobileImageUrl}
-                alt={images[currentIndex].mobileImageUrl}
+                src={images[currentIndex]?.mobileImageUrl}
+                alt={'img'}
               />
               <button
                 className="absolute top-1/2 left-4 transform -translate-y-1/2 text-white bg-black bg-opacity-50 p-2 rounded-full"
@@ -130,7 +130,7 @@ const page = () => {
             <h1 className="">HOT DEALS</h1>
             <p>[UP TO 34% OFF] HAPPY HOUR</p>
           </div>
-          {collections?.items?.map((collection) => (
+          {collections?.items?.map((collection:any) => (
             <div
               key={collection.id}
               className="flex-shrink-0 w-64 bg-gray-200 rounded-lg p-4"
