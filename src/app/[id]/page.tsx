@@ -16,7 +16,6 @@ const page = () => {
   console.log(params.id);
   const id = params.id;
   const [data, setData] = useState([] as any);
-  console.log(data);
 
   useEffect(() => {
     const res = axios
