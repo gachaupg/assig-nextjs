@@ -36,3 +36,5 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
 Have use rest api because thats what i have a good background in . using axios to fetch data and useEffect as a react hook
+
+Deployed the link https://assig-nextjs-a84v.vercel.app/
